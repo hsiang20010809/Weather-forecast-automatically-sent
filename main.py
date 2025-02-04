@@ -7,7 +7,8 @@ from datetime import datetime
 
 my_email = "your_email_address"
 target_email = ["your_target_email_address"]
-password = "your_api_key"
+google_app_password = "你的google應用程式密碼"
+central_weather_api_key = "你的中央氣象局api授權碼"
 
 def send_email():
     now = datetime.now().strftime("%Y-%m-%d")
@@ -18,7 +19,7 @@ def send_email():
     msg.set_content(get_weather())
 
     connection = smtplib.SMTP_SSL("smtp.gmail.com")
-    connection.login(my_email, password)
+    connection.login(my_email, google_app_password)
     connection.send_message(msg)
     connection.close()
     print(f"{now} 天氣預報信件發送成功")
@@ -27,7 +28,7 @@ def send_email():
 def get_weather():
     location = "新竹市" #根據需求自行更改
     params = {
-    "Authorization":"你的中央氣象局api授權碼",
+    "Authorization":central_weather_api_key,
     "locationName":location
     }
     # 中央氣象局已更改主機網址為https://opendata.cwa.gov.tw
